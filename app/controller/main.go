@@ -26,6 +26,12 @@ func Download(w http.ResponseWriter, r *http.Request) {
 		}
 	}()
 
+	formats := video.StreamingData.Formats
+
+	if len(formats) == 0 {
+		return
+	}
+
 	url := findBestFormat(video.StreamingData.Formats).URL
 
 	if url == "" {
