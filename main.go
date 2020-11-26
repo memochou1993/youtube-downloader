@@ -1,18 +1,13 @@
 package main
 
 import (
-	"context"
-	"fmt"
-	"github.com/memochou1993/youtube-downloader/app"
+	"github.com/memochou1993/youtube-downloader/app/controller"
+	"log"
+	"net/http"
 )
 
 func main() {
-	client := &app.Client{}
+	http.HandleFunc("/", controller.Download)
 
-	id := ""
-
-	video := client.GetVideo(context.Background(), id)
-
-	// TODO
-	fmt.Println(video)
+	log.Fatal(http.ListenAndServe(":8083", nil))
 }
